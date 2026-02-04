@@ -1,66 +1,147 @@
 import { Box, Typography, Button } from "@mui/material";
-import { useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function OutcomeDetails() {
   const { id } = useParams();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const data = location.state;
+
+  useEffect(() => {
+    // direct URL open pannina redirect
+    if (!data) {
+      navigate("/analysis/outcomes");
+    }
+  }, [data, navigate]);
+
+  if (!data) return null;
 
   return (
     <Box bgcolor="#fff" borderRadius={2} p={3}>
-      {/* Header */}
+      {/* HEADER */}
       <Box display="flex" justifyContent="space-between" mb={3}>
         <Typography fontSize={20} fontWeight={600}>
           Details
         </Typography>
-        <Button variant="contained">Edit</Button>
+
+        {/* ✅ EDIT BUTTON */}
+        <Button
+          variant="contained"
+          onClick={() =>
+            navigate(`/analysis/outcomes/${id}/edit`, {
+              state: data,
+            })
+          }
+        >
+          Edit
+        </Button>
       </Box>
 
-      {/* College Information */}
-      <Typography fontWeight={600} mb={1}>
+      {/* COLLEGE INFORMATION */}
+      <Typography fontWeight={600} mb={2}>
         College Information
       </Typography>
 
-      <Box display="grid" gridTemplateColumns="repeat(4, 1fr)" gap={3} mb={4}>
-        <Info label="ID Number" value={id} />
-        <Info
-          label="College Name"
-          value="Francis Xavier Engineering College"
-        />
-        <Info label="External Training" value="Yes" />
-        <Info label="Placement" value="Satisfied" />
-        <Info label="Coding Platforms" value="Yes" />
-        <Info label="Observation" value="Weak in both Skills" />
+      <Box display="grid" gridTemplateColumns="repeat(4,1fr)" gap={3} mb={4}>
+        <Box>
+          <Typography color="text.secondary" fontSize={13}>
+            ID Number
+          </Typography>
+          <Typography>{data.id}</Typography>
+        </Box>
+
+        <Box>
+          <Typography color="text.secondary" fontSize={13}>
+            College Name
+          </Typography>
+          <Typography>{data.college}</Typography>
+        </Box>
+
+        <Box>
+          <Typography color="text.secondary" fontSize={13}>
+            External Training
+          </Typography>
+          <Typography>{data.training}</Typography>
+        </Box>
+
+        <Box>
+          <Typography color="text.secondary" fontSize={13}>
+            Placement
+          </Typography>
+          <Typography>{data.placement}</Typography>
+        </Box>
+
+        <Box>
+          <Typography color="text.secondary" fontSize={13}>
+            Coding Platforms
+          </Typography>
+          <Typography>{data.coding}</Typography>
+        </Box>
+
+        <Box>
+          <Typography color="text.secondary" fontSize={13}>
+            Observation
+          </Typography>
+          <Typography>{data.observation}</Typography>
+        </Box>
       </Box>
 
-      {/* POC */}
-      <Typography fontWeight={600} mb={1}>
+      {/* POINT OF CONTACT */}
+      <Typography fontWeight={600} mb={2}>
         Point Of Contact
       </Typography>
 
-      <Box display="grid" gridTemplateColumns="repeat(4, 1fr)" gap={3} mb={4}>
-        <Info label="Name" value="Alex" />
-        <Info label="Role" value="Madurai" />
-        <Info label="Mail Id" value="alex@gmail.com" />
-        <Info label="Phone Number" value="2346534688" />
+      <Box display="grid" gridTemplateColumns="repeat(4,1fr)" gap={3} mb={4}>
+        <Box>
+          <Typography color="text.secondary" fontSize={13}>
+            Name
+          </Typography>
+          <Typography>Alex</Typography>
+        </Box>
+
+        <Box>
+          <Typography color="text.secondary" fontSize={13}>
+            Role
+          </Typography>
+          <Typography>Madurai</Typography>
+        </Box>
+
+        <Box>
+          <Typography color="text.secondary" fontSize={13}>
+            Mail Id
+          </Typography>
+          <Typography>alex@gmail.com</Typography>
+        </Box>
+
+        <Box>
+          <Typography color="text.secondary" fontSize={13}>
+            Phone Number
+          </Typography>
+          <Typography>2346534688</Typography>
+        </Box>
       </Box>
 
-      {/* Buttons */}
-      <Box display="flex" justifyContent="flex-end" gap={2}>
-        <Button variant="outlined">Cancel</Button>
-        <Button variant="contained">Update</Button>
-      </Box>
-    </Box>
-  );
-}
+      {/* DOCUMENT */}
+      <Typography fontWeight={600} mb={1}>
+        Document
+      </Typography>
 
-function Info({ label, value }) {
-  return (
-    <Box>
-      <Typography fontSize={12} color="text.secondary">
-        {label}
-      </Typography>
-      <Typography fontSize={14} fontWeight={500}>
-        {value}
-      </Typography>
+      <Box
+        p={2}
+        border="1px solid #e5e7eb"
+        borderRadius={2}
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+        maxWidth={420}
+      >
+        <Typography fontSize={14}>
+          Document <span style={{ color: "#6b7280" }}>(13.76 kb)</span>
+        </Typography>
+        <Button size="small">Download</Button>
+      </Box>
     </Box>
   );
 }

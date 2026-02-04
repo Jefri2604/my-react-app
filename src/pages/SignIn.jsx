@@ -23,6 +23,7 @@ export default function SignIn() {
         gridTemplateColumns: "1.1fr 1fr",
         bgcolor: "#fff",
         overflow: "hidden",
+        
       }}
     >
       {/* ================= LEFT IMAGE SECTION ================= */}
@@ -44,6 +45,7 @@ export default function SignIn() {
             position: "relative",
             display: "flex",
             justifyContent: "center",
+            caretColor: "transparent",
           }}
         >
           <img
@@ -121,7 +123,10 @@ export default function SignIn() {
           </Button>
 
           {/* ================= OR LOGIN WITH ================= */}
-          <Divider sx={{ mb: 2 }}>or login with</Divider>
+          <Divider sx={{ mb: 2,
+            caretColor: "transparent",
+
+           }}>or login with</Divider>
 
           {/* ================= GOOGLE + APPLE BUTTONS ================= */}
           <Box sx={{ display: "flex", gap: 2, mb: 3 }}>
@@ -158,9 +163,10 @@ export default function SignIn() {
           </Box>
 
           {/* ================= SIGN UP ================= */}
-          <Typography align="center" fontSize={13} color="text.secondary">
+          <Typography align="center" fontSize={13} color="text.secondary"
+          >
             Don’t have account?{" "}
-            <span style={{ color: "#2563eb", cursor: "pointer" }}>
+            <span style={{ color: "#2563eb", cursor: "pointer", }}>
               Sign up
             </span>
           </Typography>

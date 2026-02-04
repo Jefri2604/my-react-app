@@ -21,9 +21,8 @@ import InsertDriveFileOutlinedIcon from "@mui/icons-material/InsertDriveFileOutl
 import FolderZipOutlinedIcon from "@mui/icons-material/FolderZipOutlined";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import OutcomesBreadcrumb from "../../components/OutcomesBreadcrumb";
 
-/* ================= TABLE DATA (3 ROWS) ================= */
+/*  TABLE DATA  */
 const rows = [
   {
     id: "1234566",
@@ -54,7 +53,6 @@ const rows = [
 export default function Outcomes() {
   const navigate = useNavigate();
 
-  /* SCROLL FIX — PAGE LOAD TOP */
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -170,7 +168,9 @@ export default function Outcomes() {
 
         <MenuItem
           onClick={() => {
-            navigate(`/analysis/outcomes/${selectedRow?.id}`);
+            navigate(`/analysis/outcomes/${selectedRow?.id}`, {
+              state: selectedRow,
+            });
             closeRowMenu();
           }}
         >

@@ -102,7 +102,7 @@ export default function Navigation() {
             </ListItemButton>
 
             <Collapse in={openAcademic}>
-              {["symposium", "guest-lecture", "workshop", "programme"].map(
+              {["Symposium", "Guest-lecture", "Workshop", "Programme"].map(
                 (item) => (
                   <ListItemButton
                     key={item}
@@ -117,7 +117,7 @@ export default function Navigation() {
                   >
                     <ListItemText
                       primary={`• ${item.replace("-", " ")}`}
-                      primaryTypographyProps={{ fontSize: 13 }}
+                      primaryTypographyProps={{ fontSize: 14 }}
                     />
                   </ListItemButton>
                 )
@@ -134,7 +134,7 @@ export default function Navigation() {
             </ListItemButton>
 
             <Collapse in={openCareer}>
-              {["on-campus", "placement", "internship"].map((item) => (
+              {["On-campus", "Placement", "Internship"].map((item) => (
                 <ListItemButton
                   key={item}
                   component={NavLink}
@@ -148,7 +148,7 @@ export default function Navigation() {
                 >
                   <ListItemText
                     primary={`• ${item.replace("-", " ")}`}
-                    primaryTypographyProps={{ fontSize: 13 }}
+                    primaryTypographyProps={{ fontSize: 14 }}
                   />
                 </ListItemButton>
               ))}
@@ -164,7 +164,7 @@ export default function Navigation() {
             </ListItemButton>
 
             <Collapse in={openSkill}>
-              {["professional", "value-added", "hackathon"].map((item) => (
+              {["Professional", "Value-added", "Hackathon"].map((item) => (
                 <ListItemButton
                   key={item}
                   component={NavLink}
@@ -178,7 +178,7 @@ export default function Navigation() {
                 >
                   <ListItemText
                     primary={`• ${item.replace("-", " ")}`}
-                    primaryTypographyProps={{ fontSize: 13 }}
+                    primaryTypographyProps={{ fontSize: 14 }}
                   />
                 </ListItemButton>
               ))}

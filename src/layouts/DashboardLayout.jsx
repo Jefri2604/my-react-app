@@ -1,27 +1,24 @@
 import { Box } from "@mui/material";
 import { Outlet } from "react-router-dom";
 import Navigation from "../components/Navigation";
-import Header from "../components/Header"; // 👈 ALERT HEADER
-import Sidebar from "../components/Sidebar";
-import Topbar from "../components/Topbar";
-
-
+import Header from "../components/Header";
+// import Sidebar from "../components/Sidebar";
+// import Topbar from "../components/Topbar";
 
 export default function DashboardLayout() {
   return (
 
-    
     <Box
       sx={{
         display: "flex",
         minHeight: "100vh",
-        overflow: "hidden", // 🔥 parent never scrolls
+        overflow: "hidden",
       }}
     >
-      {/* ================= SIDEBAR ================= */}
+      {/*  SIDEBAR  */}
       <Navigation />
 
-      {/* ================= RIGHT SIDE ================= */}
+      {/*  RIGHT SIDE  */}
       <Box
         sx={{
           flex: 1,
@@ -30,10 +27,10 @@ export default function DashboardLayout() {
           overflow: "hidden",
         }}
       >
-        {/* ================= HEADER (WITH ALERT POPOVER) ================= */}
+        {/*HEADER (WITH ALERT POPOVER)*/}
         <Header />
 
-        {/* ================= PAGE CONTENT (ONLY SCROLL HERE) ================= */}
+        {/*PAGE CONTENT (ONLY SCROLL HERE)*/}
         <Box
           sx={{
             flex: 1,
@@ -46,8 +43,6 @@ export default function DashboardLayout() {
         </Box>
       </Box>
     </Box>
-
-
 
   );
 }
