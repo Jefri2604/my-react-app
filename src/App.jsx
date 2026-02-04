@@ -1,6 +1,8 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 
 import SignIn from "./pages/SignIn";
+import Signup from "./pages/Signup";  
+
 import DashboardLayout from "./layouts/DashboardLayout";
 
 import Dashboard from "./pages/Dashboards";
@@ -28,7 +30,7 @@ import ProjectView from "./pages/ProjectView";
 import Analysis from "./pages/analysis/Analysis";
 import Outcomes from "./pages/analysis/Outcomes";
 import OutcomeDetails from "./pages/analysis/OutcomeDetails";
-import OutcomeEdit from "./pages/analysis/OutcomeEdit"; // ✅ ADD THIS
+import OutcomeEdit from "./pages/analysis/OutcomeEdit";
 import Expectations from "./pages/analysis/Expectations";
 import Finance from "./pages/analysis/Finance";
 import Attendance from "./pages/analysis/Attendance";
@@ -36,8 +38,12 @@ import Attendance from "./pages/analysis/Attendance";
 export default function App() {
   return (
     <Routes>
+
       {/* 🔹 SIGN IN */}
       <Route path="/" element={<SignIn />} />
+
+      {/* 🔹 SIGN UP */}
+      <Route path="/Signup" element={<Signup />} />
 
       {/* 🔹 PAGES WITH SIDEBAR + HEADER */}
       <Route element={<DashboardLayout />}>
@@ -108,6 +114,7 @@ export default function App() {
 
       {/* 🔹 SAFETY REDIRECT */}
       <Route path="*" element={<Navigate to="/" />} />
+
     </Routes>
   );
 }
