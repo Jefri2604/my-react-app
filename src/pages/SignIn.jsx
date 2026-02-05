@@ -67,6 +67,7 @@ export default function SignIn() {
           alignItems: "center",
           justifyContent: "center",
           p: 6,
+          pointerEvents: "none",
         }}
       >
         <Box
@@ -80,6 +81,8 @@ export default function SignIn() {
             display: "flex",
             justifyContent: "center",
             caretColor: "transparent",
+            userSelect: "none",
+  
           }}
         >
           <img
@@ -89,6 +92,11 @@ export default function SignIn() {
               width: "60%",
               position: "absolute",
               bottom: "-100px",
+              cursor: "none",
+              userSelect: "none",
+              pointerEvents: "none",
+
+
             }}
           />
         </Box>
@@ -158,6 +166,7 @@ export default function SignIn() {
               textTransform: "none",
               fontWeight: 600,
               mb: 3,
+              backgroundcolor: "#034CA5",
             }}
           >
             {loading ? "Signing in..." : "Sign in"}

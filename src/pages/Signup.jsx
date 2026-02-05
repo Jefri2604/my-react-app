@@ -1,51 +1,56 @@
 import * as React from "react";
 import { Box, TextField, Button, Typography, Link } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { signUpApi } from "../api/auth";
 
 export default function Signup() {
+
+  const navigate = useNavigate();
+
+  const [name, setName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
+
+  const handleSignup = async () => {
+
+    if (!name.trim() || !email.trim() || !password.trim()) {
+      alert("Please fill all fields");
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      const res = await signUpApi({ name, email, password });
+
+      if (res.data?.token) {
+        localStorage.setItem("token", res.data.token);
+      }
+
+      navigate("/dashboard", { replace: true });
+
+    } catch (error) {
+
+      alert(
+        error?.response?.data?.message || "Signup failed"
+      );
+
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <Box
       sx={{
-        height: "100vh",
-        background: "#e5e5e5",
+        minHeight: "100vh",
+        backgroundColor: "#ffffff",
         display: "flex"
       }}
     >
-      {/* LEFT DESIGN SIDE */}
-      <Box
-        sx={{
-          flex: 1.2,
-          position: "relative"
-        }}
-      >
-        {/* top rounded shape */}
-        <Box
-          sx={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "75%",
-            height: 190,
-            background: "#cfe4ff",
-            borderBottomLeftRadius: 120,
-            borderBottomRightRadius: 120
-          }}
-        />
 
-        {/* thin vertical line */}
-        <Box
-          sx={{
-            position: "absolute",
-            top: 190,
-            right: 0,
-            width: 10,
-            height: 260,
-            background: "#cfe4ff",
-            borderBottomRightRadius: 60
-          }}
-        />
-      </Box>
-
-      {/* RIGHT FORM SIDE */}
+      {/* ================= LEFT IMAGE SIDE ================= */}
       <Box
         sx={{
           flex: 1,
@@ -54,10 +59,50 @@ export default function Signup() {
           justifyContent: "center"
         }}
       >
-        <Box sx={{ width: 300 }}>
+        <Box
+          sx={{
+            width: "78%",
+            height: "72%",
+            backgroundColor: "#dbeafe",   // light blue
+            borderRadius: 6,
+            position: "relative",
+            display: "flex",
+            alignItems: "flex-end",
+            justifyContent: "center",
+            pb: 4
+          }}
+        >
+          <img
+            src="/signup.png"
+            alt="signup"
+            style={{
+              width: "420px",
+              maxWidth: "90%",
+              objectFit: "contain"
+            }}
+          />
+        </Box>
+      </Box>
+
+
+      {/* ================= RIGHT FORM SIDE ================= */}
+      <Box
+        sx={{
+          flex: 1,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center"
+        }}
+      >
+        <Box sx={{ width: 420 }}>
+
           <Typography
-            variant="h4"
-            sx={{ fontWeight: 600, mb: 3 }}
+            sx={{
+              fontSize: 34,
+              fontWeight: 700,
+              textAlign: "center",
+              mb: 4
+            }}
           >
             Sign up
           </Typography>
@@ -66,15 +111,18 @@ export default function Signup() {
             variant="standard"
             fullWidth
             placeholder="Enter your name"
-            InputProps={{ disableUnderline: false }}
-            sx={{ mb: 2 }}
+            sx={{ mb: 3 }}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
 
           <TextField
             variant="standard"
             fullWidth
             placeholder="Enter your email address"
-            sx={{ mb: 2 }}
+            sx={{ mb: 3 }}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
 
           <TextField
@@ -82,43 +130,49 @@ export default function Signup() {
             fullWidth
             type="password"
             placeholder="Password"
+            sx={{ mb: 4 }}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
 
           <Button
             fullWidth
-            sx={{
-              mt: 3,
-              py: 1,
-              textTransform: "none",
-              background: "#0a4fb3",
-              "&:hover": {
-                background: "#083f90"
-              }
-            }}
             variant="contained"
+            onClick={handleSignup}
+            disabled={loading}
+            sx={{
+              height: 48,
+              fontSize: 16,
+              textTransform: "none",
+              backgroundColor: "#034CA5",
+              borderRadius: 1.5
+            }}
           >
-            Sign up
+            {loading ? "Signing up..." : "Sign up"}
           </Button>
 
           <Typography
             sx={{
-              mt: 2,
-              fontSize: 12,
+              mt: 3,
               textAlign: "center",
-              color: "#777"
+              fontSize: 14,
+              color: "#666"
             }}
           >
             Already have an account?{" "}
             <Link
-              href="/signin"
+              component="button"
+              onClick={() => navigate("/")}
               underline="none"
-              sx={{ color: "#0a4fb3", fontWeight: 600 }}
+              sx={{ fontWeight: 600 }}
             >
               Sign in
             </Link>
           </Typography>
+
         </Box>
       </Box>
+
     </Box>
   );
 }
